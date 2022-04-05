@@ -724,5 +724,10 @@
     "Åland Islands": "Åland Islands",
 
     "guest": "ゲスト",
-    "Posts": "投稿一覧"
+    "Posts": "投稿一覧",
+    "New post": "新規投稿",
+    "Title": "タイトル",
+    "Body": "本文",
+    "Send post": "投稿する"
+
 }
