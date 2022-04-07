@@ -24,6 +24,9 @@ Route::post('/posts/store', [PostController::class, 'store'])
     ->name('posts.store')
     ->middleware('auth');
 
+Route::get('/posts/{post}', [PostController::class, 'show'])
+    ->name('posts.show');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

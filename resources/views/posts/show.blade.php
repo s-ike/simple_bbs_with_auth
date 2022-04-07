@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Posts') }}
+            {{ __('Post detail') }}
         </h2>
     </x-slot>
 
@@ -9,13 +9,8 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    @forelse ($posts as $post)
-                        <div>
-                            <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>
-                        </div>
-                    @empty
-                        まだ投稿がありません。
-                    @endforelse
+                    <div>{{ $post->title }}</div>
+                    <div>{{ $post->body }}</div>
                 </div>
             </div>
         </div>
