@@ -14,7 +14,13 @@
                 </div>
                 <div>
                     <div><a href="{{ route('posts.edit', $post) }}">{{ __('Edit') }}</a></div>
-                    <div>{{  __('Delete') }}</div>
+                    <div>
+                        <form action="{{ route('posts.destroy', $post) }}" method="post">
+                            @method('DELETE')
+                            @csrf
+                            <button>{{  __('Delete') }}</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

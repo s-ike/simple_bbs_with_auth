@@ -34,6 +34,10 @@ Route::put('/posts/{post}/update', [PostController::class, 'update'])
     ->name('posts.update')
     ->middleware('auth');
 
+Route::delete('/posts/{post}/destroy', [PostController::class, 'destroy'])
+    ->name('posts.destroy')
+    ->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
