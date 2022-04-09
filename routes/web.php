@@ -27,6 +27,13 @@ Route::post('/posts/store', [PostController::class, 'store'])
 Route::get('/posts/{post}', [PostController::class, 'show'])
     ->name('posts.show');
 
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])
+    ->name('posts.edit')
+    ->middleware('auth');
+Route::put('/posts/{post}/update', [PostController::class, 'update'])
+    ->name('posts.update')
+    ->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

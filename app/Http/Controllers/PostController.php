@@ -57,7 +57,7 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -68,24 +68,35 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  App\Models\Post           $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'title' => 'required|min:3',
+            'body' => 'required',
+        ]);
+
+        $post->title = $request->title;
+        $post->body = $request->body;
+        $post->save();
+
+        return redirect()
+            ->route('posts.show', $post)
+            ->with(['message' => '編集しました。']);
     }
 
     /**

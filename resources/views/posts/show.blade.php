@@ -12,6 +12,10 @@
                     <div>{{ $post->title }}</div>
                     <div>{{ $post->body }}</div>
                 </div>
+                <div>
+                    <div><a href="{{ route('posts.edit', $post) }}">{{ __('Edit') }}</a></div>
+                    <div>{{  __('Delete') }}</div>
+                </div>
             </div>
         </div>
     </div>
