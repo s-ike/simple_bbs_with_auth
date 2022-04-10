@@ -12,16 +12,18 @@
                     <div>{{ $post->title }}</div>
                     <div>{{ $post->body }}</div>
                 </div>
-                <div>
-                    <div><a href="{{ route('posts.edit', $post) }}">{{ __('Edit') }}</a></div>
+                @if ($post->user_id === \Illuminate\Support\Facades\Auth::id())
                     <div>
-                        <form action="{{ route('posts.destroy', $post) }}" method="post">
-                            @method('DELETE')
-                            @csrf
-                            <button>{{  __('Delete') }}</button>
-                        </form>
+                        <div><a href="{{ route('posts.edit', $post) }}">{{ __('Edit') }}</a></div>
+                        <div>
+                            <form action="{{ route('posts.destroy', $post) }}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button>{{  __('Delete') }}</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
