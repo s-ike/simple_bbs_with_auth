@@ -1,7 +1,7 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+    <div class="container mx-auto p-5">
+        <div class="flex justify-between h-8">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class="hidden space-x-4 sm:-my-px sm:ml-4 sm:pl-4 sm:flex sm:border-l sm:border-gray-400">
                     <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.index')">
                         {{ __('Posts') }}
                     </x-nav-link>
@@ -58,10 +58,14 @@
                 @endauth
 
                 @guest
-                <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Log in') }}</a>
+                <a href="{{ route('login') }}" class="inline-flex items-center text-sm font-medium bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded mt-4 md:mt-0">
+                    {{ __('Log in') }}
+                </a>
 
                 @if (Route::has('register'))
-                    <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Register') }}</a>
+                    <a href="{{ route('register') }}" class="ml-2 inline-flex items-center text-sm font-medium text-white bg-gray-700 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded mt-4 md:mt-0">
+                        {{ __('Register') }}
+                    </a>
                 @endif
                 @endguest
             </div>
