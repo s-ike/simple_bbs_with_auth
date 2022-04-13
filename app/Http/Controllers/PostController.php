@@ -25,13 +25,14 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $posts = Post::latest()
             ->with('user')
-            ->get();
+            ->paginate($request->pagination ?? '20');
 
         return view('posts.index', compact('posts'));
     }
