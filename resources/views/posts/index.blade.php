@@ -7,8 +7,8 @@
 
     <div class="py-12">
         @if (session('message'))
-            <div class="sm:px-6 lg:px-8">
-                <div class="bg-blue-500 max-w-7xl mx-auto p-2 my-4 text-white">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div class="bg-blue-500 max-w-7xl mx-auto p-2 mb-4 text-white">
                     {{ session('message') }}
                 </div>
             </div>
@@ -45,7 +45,7 @@
                                     @foreach ($posts as $post)
                                         <tr>
                                             <td class="border border-slate-700 px-4 py-2">
-                                                <a href="{{ route('posts.show', $post) }}" class="hover:text-indigo-700">{{ $post->title }}</a>
+                                                <a href="{{ route('posts.show', $post) }}" class="text-indigo-500 hover:text-indigo-700">{{ $post->title }}</a>
                                             </td>
                                             <td class="border border-slate-700 px-4 py-2">{{ $post->user->name }}</td>
                                             <td class="border border-slate-700 px-4 py-2">{{ $post->created_at }}</td>
