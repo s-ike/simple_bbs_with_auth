@@ -730,6 +730,7 @@
     "Edit post": "投稿編集",
     "Title": "タイトル",
     "Body": "本文",
-    "Send post": "投稿する"
-
+    "Comment": "コメント",
+    "Send post": "投稿する",
+    "Send comment": "コメントを投稿する"
 }
