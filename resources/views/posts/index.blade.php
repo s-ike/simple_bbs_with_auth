@@ -45,7 +45,12 @@
                                     @foreach ($posts as $post)
                                         <tr>
                                             <td class="border border-slate-700 px-4 py-2">
-                                                <a href="{{ route('posts.show', $post) }}" class="text-indigo-500 hover:text-indigo-700">{{ $post->title }}</a>
+                                                <div class="flex">
+                                                    <p>{{ $post->id }}</p>
+                                                    <a href="{{ route('posts.show', $post) }}" class="text-indigo-500 hover:text-indigo-700 ml-2">
+                                                        {{ $post->title }}
+                                                    </a>
+                                                </div>
                                             </td>
                                             <td class="border border-slate-700 px-4 py-2">{{ $post->user->name }}</td>
                                             <td class="border border-slate-700 px-4 py-2">{{ $post->created_at }}</td>

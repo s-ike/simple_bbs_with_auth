@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
@@ -74,12 +75,17 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  App\Models\Post  $post
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Models\Post           $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Request $request, Post $post)
     {
-        $comments = $post->comments;
+        $comments = Comment::where('post_id', $post->id)
+            ->with('user')
+            ->oldest()
+            ->paginate($request->pagination ?? '10');
+
         return view('posts.show', compact('post', 'comments'));
     }
 

@@ -60,12 +60,26 @@
 
                     @if ($comments && count($comments) > 0)
                         <div class="border-2 rounded-lg border-gray-200 border-opacity-50 p-8 mb-4 sm:flex-row flex-col divide-y divide-gray-500">
-                            @php
-                                $i = 0;
-                            @endphp
+                            @if ($comments && count($comments) >= 10)
+                                <form action="{{ route('posts.show', $post) }}" method="get">
+                                    <div class="text-right">
+                                        <label for="pagination">表示件数</label>
+                                        <select name="pagination" id="pagination">
+                                            <option value="10"
+                                                @if (\Request::get('pagination') === '10')
+                                                    selected
+                                                @endif>10件</option>
+                                            <option value="20"
+                                                @if (\Request::get('pagination') === '20')
+                                                    selected
+                                                @endif>20件</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            @endif
                             @foreach ($comments as $comment)
-                                <div @if ($i > 0) class="mt-4" @endif>
-                                    <div @if ($i > 0) class="mt-4" @endif>
+                                <div class="mt-4">
+                                    <div class="mt-4">
                                         {{ $comment->body }}
                                     </div>
                                     <div class="flex pt-2">
@@ -77,10 +91,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                @php
-                                    $i++;
-                                @endphp
                             @endforeach
+                            {{ $comments->links() }}
                         </div>
                     @endif
 
@@ -103,4 +115,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const paginate = document.getElementById('pagination');
+        paginate.addEventListener('change', function () {
+            this.form.submit();
+        });
+    </script>
 </x-app-layout>
