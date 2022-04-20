@@ -38,7 +38,7 @@
                                     <tr>
                                         <th class="border border-slate-600 w-2/4">タイトル</th>
                                         <th class="border border-slate-600 w-1/4">投稿者</th>
-                                        <th class="border border-slate-600 w-1/4">投稿日時</th>
+                                        <th class="border border-slate-600 w-1/4">更新日時</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -53,7 +53,7 @@
                                                 </div>
                                             </td>
                                             <td class="border border-slate-700 px-4 py-2">{{ $post->user->name }}</td>
-                                            <td class="border border-slate-700 px-4 py-2">{{ $post->created_at }}</td>
+                                            <td class="border border-slate-700 px-4 py-2">{{ $post->latest_comment_time }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>

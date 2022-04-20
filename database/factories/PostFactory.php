@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,8 @@ class PostFactory extends Factory
         return [
             'user_id' => 1,
             'title' => $this->faker->realText(10),
-            'body' => $this->faker->realText(100)
+            'body' => $this->faker->realText(100),
+            'latest_comment_time' => Carbon::now(),
         ];
     }
 }

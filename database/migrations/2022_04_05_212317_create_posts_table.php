@@ -21,6 +21,7 @@ return new class extends Migration
                 ->onDelete('cascade');
             $table->string('title');
             $table->text('body');
+            $table->timestamp('latest_comment_time');
             $table->timestamps();
         });
     }

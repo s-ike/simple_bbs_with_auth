@@ -6,6 +6,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
+use Carbon\Carbon;
 
 class PostController extends Controller
 {
@@ -33,6 +34,7 @@ class PostController extends Controller
     {
         $posts = Post::latest()
             ->with('user')
+            ->orderBy('latest_comment_time', 'DESC')
             ->paginate($request->pagination ?? '20');
 
         return view('posts.index', compact('posts'));
@@ -65,6 +67,7 @@ class PostController extends Controller
         $post->user_id = Auth::id();
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->latest_comment_time = Carbon::now();
         $post->save();
 
         return redirect()
