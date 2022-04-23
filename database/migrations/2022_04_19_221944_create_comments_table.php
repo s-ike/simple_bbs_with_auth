@@ -24,6 +24,8 @@ return new class extends Migration
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
             $table->text('body');
+            $table->timestamp('deleted_at')
+                ->nullable();
             $table->timestamps();
         });
     }

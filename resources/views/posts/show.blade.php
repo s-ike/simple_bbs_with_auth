@@ -85,20 +85,46 @@
                             @endphp
                             @foreach ($sorted_comments as $comment)
                                 <div class="mb-4">
-                                    <div class="mt-4">
-                                        {{ $comment->body }}
-                                    </div>
-                                    <div class="flex pt-2">
-                                        <div class="font-semibold">
-                                            {{ $i }}
+                                    @if ($comment->deleted_at)
+                                        <div class="mt-4">
+                                            (削除されました)
                                         </div>
-                                        <div class="ml-4">
-                                            投稿者：{{ $comment->user->name }}
+                                        <div class="flex items-center pt-2">
+                                            <div class="font-semibold">
+                                                {{ $i }}
+                                            </div>
+                                            <div class="ml-4">
+                                                投稿日時：{{ $comment->created_at }}
+                                            </div>
+                                            <div class="ml-4">
+                                                削除日時：{{ $comment->deleted_at }}
+                                            </div>
                                         </div>
-                                        <div class="ml-4">
-                                            投稿日時：{{ $comment->created_at }}
+                                    @else
+                                        <div class="mt-4">
+                                            {{ $comment->body }}
                                         </div>
-                                    </div>
+                                        <div class="flex items-center pt-2">
+                                            <div class="font-semibold">
+                                                {{ $i }}
+                                            </div>
+                                            <div class="ml-4">
+                                                投稿者：{{ $comment->user->name }}
+                                            </div>
+                                            <div class="ml-4">
+                                                投稿日時：{{ $comment->created_at }}
+                                            </div>
+                                            @if ($comment->user->id === \Illuminate\Support\Facades\Auth::id())
+                                                <form id="delete_{{ $comment->id }}" action="{{ route('comments.destroy', [$post, $comment]) }}" method="post">
+                                                    @method('DELETE')
+                                                    @csrf
+                                                    <a href="#" data-id="{{ $comment->id }}" onclick="deleteComment(this)" class="flex mx-auto ml-2 text-white bg-red-500 border-0 py-1 px-4 focus:outline-none hover:bg-red-600 rounded">
+                                                        {{  __('Delete') }}
+                                                    </a>
+                                                </form>
+                                            @endif
+                                        </div>
+                                    @endif
                                 </div>
                                 @php
                                     ++$i;
@@ -131,9 +157,17 @@
     </div>
 
     <script>
+        'use strict'
         const paginate = document.getElementById('pagination');
         paginate.addEventListener('change', function () {
             this.form.submit();
         });
+
+        function deleteComment(e) {
+            'use strict';
+            if (confirm('本当に削除してもいいですか？')) {
+                document.getElementById('delete_' + e.dataset.id).submit();
+            }
+        }
     </script>
 </x-app-layout>

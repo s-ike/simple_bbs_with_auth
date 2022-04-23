@@ -22,5 +22,12 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password123'),
             'created_at' => '2022/01/01 11:11:11'
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'test2',
+            'email' => 'test2@test.com',
+            'password' => Hash::make('password123'),
+            'created_at' => '2022/01/02 11:11:11'
+        ]);
     }
 }

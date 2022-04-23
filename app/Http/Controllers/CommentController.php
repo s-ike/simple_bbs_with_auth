@@ -13,6 +13,13 @@ use Throwable;
 
 class CommentController extends Controller
 {
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  App\Models\Post           $post
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request, Post $post)
     {
         $request->validate([
@@ -38,5 +45,24 @@ class CommentController extends Controller
         return redirect()
             ->route('posts.show', $post)
             ->with(['message' => 'コメントしました。']);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  App\Models\Post  $post
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Post $post, Comment $comment)
+    {
+        if ($comment->user_id !== Auth::id()) {
+            abort(403);
+        }
+        $comment->deleted_at = Carbon::now();
+        $comment->save();
+
+        return redirect()
+            ->route('posts.show', $post)
+            ->with(['message' => '削除しました。']);
     }
 }
