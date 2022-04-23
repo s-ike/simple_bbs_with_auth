@@ -62,7 +62,7 @@
                         <div class="border-2 rounded-lg border-gray-200 border-opacity-50 p-8 mb-4 sm:flex-row flex-col divide-y divide-gray-500">
                             @if ($comments && count($comments) >= 10)
                                 <form action="{{ route('posts.show', $post) }}" method="get">
-                                    <div class="text-right">
+                                    <div class="text-right mb-4">
                                         <label for="pagination">表示件数</label>
                                         <select name="pagination" id="pagination">
                                             <option value="10"
@@ -77,13 +77,22 @@
                                     </div>
                                 </form>
                             @endif
-                            @foreach ($comments as $comment)
-                                <div class="mt-4">
+                            @php
+                                $i = 1;
+                                if ($comments->total() > ($comments->currentPage() * $comments->perPage())) {
+                                    $i = $comments->total() - ($comments->currentPage() * $comments->perPage()) + 1;
+                                }
+                            @endphp
+                            @foreach ($sorted_comments as $comment)
+                                <div class="mb-4">
                                     <div class="mt-4">
                                         {{ $comment->body }}
                                     </div>
                                     <div class="flex pt-2">
-                                        <div>
+                                        <div class="font-semibold">
+                                            {{ $i }}
+                                        </div>
+                                        <div class="ml-4">
                                             投稿者：{{ $comment->user->name }}
                                         </div>
                                         <div class="ml-4">
@@ -91,8 +100,13 @@
                                         </div>
                                     </div>
                                 </div>
+                                @php
+                                    ++$i;
+                                @endphp
                             @endforeach
-                            {{ $comments->links() }}
+                            <div class="pt-4">
+                                {{ $comments->links() }}
+                            </div>
                         </div>
                     @endif
 

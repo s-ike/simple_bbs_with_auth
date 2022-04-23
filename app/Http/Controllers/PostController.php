@@ -86,10 +86,12 @@ class PostController extends Controller
     {
         $comments = Comment::where('post_id', $post->id)
             ->with('user')
-            ->oldest()
+            ->latest('id')
             ->paginate($request->pagination ?? '10');
 
-        return view('posts.show', compact('post', 'comments'));
+        $sorted_comments = $comments->sortBy('id');
+
+        return view('posts.show', compact('post', 'comments', 'sorted_comments'));
     }
 
     /**
