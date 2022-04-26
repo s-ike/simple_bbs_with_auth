@@ -65,4 +65,10 @@ class CommentController extends Controller
             ->route('posts.show', $post)
             ->with(['message' => '削除しました。']);
     }
+
+    public function auth(Post $post)
+    {
+        return redirect()
+            ->route('posts.show', $post);
+    }
 }

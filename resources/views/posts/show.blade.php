@@ -137,19 +137,31 @@
                     @endif
 
                     <div>
-                        <form action="{{ route('comments.store', $post) }}" method="post">
-                            @csrf
-                            <div>
-                                <label for="body" class="leading-7">{{ __('Comment') }}</label>
-                                <textarea name="body" id="body" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('body') }}</textarea>
-                                @error('body')
-                                    <div class="text-red-600">{{ $message }}</div>
-                                @enderror
-                                <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">
-                                    {{ __('Send comment') }}
-                                </button>
+                        @auth
+                            <form action="{{ route('comments.store', $post) }}" method="post">
+                                @csrf
+                                <div>
+                                    <label for="body" class="leading-7">{{ __('Comment') }}</label>
+                                    <textarea name="body" id="body" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">{{ old('body') }}</textarea>
+                                    @error('body')
+                                        <div class="text-red-600">{{ $message }}</div>
+                                    @enderror
+                                    <button class="flex mx-auto text-white bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-600 rounded">
+                                        {{ __('Send comment') }}
+                                    </button>
+                                </div>
+                            </form>
+                        @endauth
+                        @guest
+                            <div class="text-center">
+                                <div class="text-lg">
+                                    アカウント作成してコメントを投稿する
+                                </div>
+                                <a href="{{ route('comments.auth', $post) }}" class="ml-2 inline-flex items-center text-sm font-medium text-white bg-gray-700 py-2 px-5 focus:outline-none hover:bg-gray-500 rounded">
+                                    {{ __('Register') }} / {{ __('Log in') }}
+                                </a>
                             </div>
-                        </form>
+                        @endguest
                     </div>
                 </div>
             </div>

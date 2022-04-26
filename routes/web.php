@@ -40,6 +40,9 @@ Route::middleware('auth')->group(function () {
 
     Route::delete('/posts/{post}/{comment}', [CommentController::class, 'destroy'])
         ->name('comments.destroy');
+
+    Route::get('/posts/{post}/comments/auth', [CommentController::class, 'auth'])
+        ->name('comments.auth');
 });
 
 Route::get('/dashboard', function () {
