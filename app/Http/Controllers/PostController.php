@@ -33,7 +33,7 @@ class PostController extends Controller
     public function index(Request $request)
     {
         $posts = Post::latest()
-            ->with('user')
+            ->with(['user', 'comments'])
             ->orderBy('latest_comment_time', 'DESC')
             ->paginate($request->pagination ?? '20');
 

@@ -50,6 +50,14 @@
                                                     <a href="{{ route('posts.show', $post) }}" class="text-indigo-500 hover:text-indigo-700 ml-2">
                                                         {{ $post->title }}
                                                     </a>
+                                                    @php
+                                                        $count = $post->comments->count();
+                                                    @endphp
+                                                    @if ($count > 0)
+                                                        <div class="flex items-center bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800">
+                                                            {{ $count }}
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </td>
                                             <td class="border border-slate-700 px-4 py-2">{{ $post->user->name }}</td>
